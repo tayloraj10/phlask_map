@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phlask_map/screens/loading.dart';
+import 'package:phlask_map/screens/map_page.dart';
 import 'package:provider/provider.dart';
 import 'models/app_data.dart';
 import 'models/constants.dart';
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        routes: {
+          '/': (context) => const LoadingPage(),
+          '/map': (context) => MapPage(),
+        },
         debugShowCheckedModeBanner: false,
         title: appName,
         theme: ThemeData(
@@ -41,11 +46,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(
             seedColor: primaryColor,
             // primary: const Color.fromARGB(255, 15, 111, 18),
-          ),
-        ),
-        home: const Scaffold(
-          body: SafeArea(
-            child: LoadingPage(),
           ),
         ),
       ),

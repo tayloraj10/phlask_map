@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:phlask_map/components/marker_dialog.dart';
 import 'package:phlask_map/models/app_data.dart';
-import 'package:phlask_map/models/constants.dart';
-import 'package:phlask_map/screens/map_page.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -43,6 +41,7 @@ class _LoadingPageState extends State<LoadingPage>
     await loadIcons();
     // await loadCleanups();
     if (mounted) {
+      Navigator.pushNamed(context, '/map');
       // Navigator.push(
       //   context,
       //   MaterialPageRoute(
@@ -108,47 +107,51 @@ class _LoadingPageState extends State<LoadingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'images/phlask_logo.png',
-            height: 50,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          AnimatedBuilder(
-            animation: _animation,
-            builder: (context, child) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'images/phlask_logo.png',
+                height: 50,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              AnimatedBuilder(
+                animation: _animation,
+                builder: (context, child) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Positioned(
-                        bottom: 20,
-                        left: 33,
-                        right: 33,
-                        child: Container(
-                          width: 10,
-                          height:
-                              300 * _animation.value, // Height of water level
-                          color: Colors.lightBlue, // Water color
-                        ),
-                      ),
-                      const Icon(Icons.local_drink, // Water bottle icon
-                          size: 150,
-                          color: Colors.lightGreen // Bottle color
+                      Stack(
+                        children: [
+                          Positioned(
+                            bottom: 20,
+                            left: 33,
+                            right: 33,
+                            child: Container(
+                              width: 10,
+                              height: 300 *
+                                  _animation.value, // Height of water level
+                              color: Colors.lightBlue, // Water color
+                            ),
                           ),
+                          const Icon(Icons.local_drink, // Water bottle icon
+                              size: 150,
+                              color: Colors.lightGreen // Bottle color
+                              ),
+                        ],
+                      ),
                     ],
-                  ),
-                ],
-              );
-            },
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
