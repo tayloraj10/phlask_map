@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phlask_map/components/filter.dart';
 import 'package:phlask_map/models/constants.dart';
 
 class MapControl extends StatefulWidget {
@@ -48,20 +49,36 @@ class _MapControlState extends State<MapControl> {
                 color: Colors.grey,
                 thickness: 1,
               ),
-              IconButton(
-                  onPressed: () => {},
-                  icon: const Icon(
-                    Icons.filter_list,
-                    size: 40,
-                    color: primaryColor,
-                  )),
-              IconButton(
-                  onPressed: () => {},
-                  icon: const Icon(
-                    Icons.add,
-                    size: 40,
-                    color: primaryColor,
-                  ))
+              Tooltip(
+                message: 'Filters/Legend',
+                child: IconButton(
+                    onPressed: () => {
+                          showModalBottomSheet(
+                            context: context,
+                            constraints: const BoxConstraints(
+                              maxWidth: double.infinity,
+                            ),
+                            builder: (BuildContext context) {
+                              return const TapFilter();
+                            },
+                          )
+                        },
+                    icon: const Icon(
+                      Icons.filter_list,
+                      size: 40,
+                      color: primaryColor,
+                    )),
+              ),
+              Tooltip(
+                message: 'New Submission',
+                child: IconButton(
+                    onPressed: () => {},
+                    icon: const Icon(
+                      Icons.add,
+                      size: 40,
+                      color: primaryColor,
+                    )),
+              )
             ],
           ),
         ),
