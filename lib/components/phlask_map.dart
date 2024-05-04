@@ -6,14 +6,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:phlask_map/models/app_data.dart';
 import 'package:provider/provider.dart';
 
-class TrashMap extends StatefulWidget {
-  const TrashMap({super.key});
+class PhlaskMap extends StatefulWidget {
+  const PhlaskMap({super.key});
 
   @override
-  State<TrashMap> createState() => _TrashMapState();
+  State<PhlaskMap> createState() => _PhlaskMapState();
 }
 
-class _TrashMapState extends State<TrashMap> {
+class _PhlaskMapState extends State<PhlaskMap> {
   late LatLng droppedPostiion;
   late String droppedType;
   bool addClean = false;
@@ -117,50 +117,13 @@ class _TrashMapState extends State<TrashMap> {
     });
   }
 
-  clickMap(LatLng position) {
-    if (addClean || addTrash) {
-      if (addClean) {
-        setState(() {
-          Provider.of<AppData>(context, listen: false).addMarker(Marker(
-              markerId: const MarkerId('new_clean'),
-              icon: Provider.of<AppData>(context, listen: false)
-                  .getIcons['cleanup'],
-              position: position,
-              draggable: false));
-          addClean = false;
-          pinDropped = true;
-          droppedPostiion = position;
-          droppedType = 'cleanup';
-        });
-      }
-      if (addTrash) {
-        setState(() {
-          Provider.of<AppData>(context, listen: false).addMarker(Marker(
-              markerId: const MarkerId('new_trash'),
-              icon: Provider.of<AppData>(context, listen: false)
-                  .getIcons['trash'],
-              position: position,
-              draggable: false));
-          addTrash = false;
-          pinDropped = true;
-          droppedPostiion = position;
-          droppedType = 'trash';
-        });
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GoogleMap(
-            onTap: ((position) {
-              clickMap(position);
-            }),
             initialCameraPosition: _kStart,
-            // markers: _markers,
-            // markers: Provider.of<AppData>(context, listen: true).getMarkers,
+            markers: Provider.of<AppData>(context, listen: true).getMarkers,
             onMapCreated: (controller) async {
               setState(() {
                 Provider.of<AppData>(context, listen: false)

@@ -6,12 +6,14 @@ import 'models/app_data.dart';
 import 'models/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -28,9 +30,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        initialRoute: '/', // Default route
         routes: {
-          '/': (context) => const LoadingPage(),
-          '/map': (context) => MapPage(),
+          '/': (context) => const LoadingPage(), // Home Screen
+          '/map': (context) => MapPage(), // Details Screen
         },
         debugShowCheckedModeBanner: false,
         title: appName,
@@ -41,11 +44,10 @@ class MyApp extends StatelessWidget {
           ),
           cardTheme: const CardTheme(surfaceTintColor: Colors.white),
           appBarTheme: const AppBarTheme(
-              color: primaryColor, foregroundColor: Colors.white),
+              color: Colors.white, foregroundColor: primaryColor),
           primaryColor: const Color.fromARGB(255, 27, 48, 28),
           colorScheme: ColorScheme.fromSeed(
             seedColor: primaryColor,
-            // primary: const Color.fromARGB(255, 15, 111, 18),
           ),
         ),
       ),

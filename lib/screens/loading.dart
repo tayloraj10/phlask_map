@@ -42,12 +42,6 @@ class _LoadingPageState extends State<LoadingPage>
     // await loadCleanups();
     if (mounted) {
       Navigator.pushNamed(context, '/map');
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => MapPage(),
-      //   ),
-      // );
     }
   }
 
@@ -57,14 +51,14 @@ class _LoadingPageState extends State<LoadingPage>
       const ImageConfiguration(size: Size(40, 40)),
       'images/current_location.png',
     );
-    BitmapDescriptor waterPublicIcon = await BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(size: Size(40, 40)),
-      'images/water_public.svg',
-    );
+    // BitmapDescriptor waterPublicIcon = await BitmapDescriptor.fromAssetImage(
+    //   const ImageConfiguration(size: Size(40, 40)),
+    //   'images/water_public.svg',
+    // );
     if (mounted) {
       Provider.of<AppData>(context, listen: false).updateIcons({
         'current': currentLocationMarkerIcon,
-        'water_public': waterPublicIcon,
+        // 'water_public': waterPublicIcon,
       });
     }
   }

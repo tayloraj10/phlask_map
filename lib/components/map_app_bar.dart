@@ -1,10 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:phlask_map/models/app_data.dart';
-import 'package:phlask_map/models/constants.dart';
-import 'package:phlask_map/screens/login.dart';
-import 'package:phlask_map/screens/profile.dart';
-import 'package:provider/provider.dart';
 
 class MapAppBar extends StatelessWidget implements PreferredSizeWidget {
   MapAppBar({super.key});
@@ -14,63 +9,14 @@ class MapAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  getProfileName(FirebaseAuth auth) {
-    String name = '';
-    if (auth.currentUser!.displayName != null) {
-      name = auth.currentUser!.displayName!;
-    } else if (auth.currentUser!.email != null) {
-      name = auth.currentUser!.email!;
-    } else if (auth.currentUser!.phoneNumber != null) {
-      name = auth.currentUser!.phoneNumber!;
-    }
-    return name;
-  }
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Row(
-        children: [
-          if (auth.currentUser != null)
-            IconButton(
-                onPressed: () => {
-                      Provider.of<AppData>(context, listen: false)
-                          .toggleShowPanel(),
-                    },
-                icon: const Icon(Icons.menu)),
-          const SizedBox(
-            width: 10,
-          ),
-          const Text(
-            appName,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-        ],
+      title: Image.asset(
+        'images/phlask_logo.png',
+        height: 40,
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: ElevatedButton(
-              onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    )
-                  },
-              child: auth.currentUser == null
-                  ? GestureDetector(
-                      child: const Text('Log In'),
-                      onTap: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Login()),
-                            )
-                          })
-                  : Text(getProfileName(auth))),
-        )
-      ],
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phlask_map/components/map_app_bar.dart';
-import 'package:phlask_map/components/trash_map.dart';
+import 'package:phlask_map/components/phlask_map.dart';
 
 class MapPage extends StatelessWidget {
   MapPage({super.key});
@@ -15,7 +15,7 @@ class MapPage extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: TrashMap(),
+              child: PhlaskMap(),
             ),
           ],
         ),

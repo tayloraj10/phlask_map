@@ -49,18 +49,6 @@ class AppData extends ChangeNotifier {
     notifyListeners();
   }
 
-  //side panel
-  bool showPanel = false;
-
-  get getShowPanel {
-    return showPanel;
-  }
-
-  void toggleShowPanel() {
-    showPanel = !showPanel;
-    notifyListeners();
-  }
-
   //map controller
   late GoogleMapController mapController;
 
