@@ -27,7 +27,7 @@ class _LoadingPageState extends State<LoadingPage>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3), // Duration of the animation
+      duration: const Duration(seconds: 3), // Duration of the animation
     );
     _animation = Tween<double>(
       begin: 0.0, // Start from an empty bottle
@@ -58,14 +58,14 @@ class _LoadingPageState extends State<LoadingPage>
       const ImageConfiguration(size: Size(40, 40)),
       'images/current_location.png',
     );
-    BitmapDescriptor cleanMarkerIcon = await BitmapDescriptor.fromAssetImage(
+    BitmapDescriptor waterPublicIcon = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size(40, 40)),
       'images/water_public.svg',
     );
     if (mounted) {
       Provider.of<AppData>(context, listen: false).updateIcons({
         'current': currentLocationMarkerIcon,
-        // 'cleanup': cleanMarkerIcon,
+        'water_public': waterPublicIcon,
       });
     }
   }
@@ -116,7 +116,7 @@ class _LoadingPageState extends State<LoadingPage>
             'images/phlask_logo.png',
             height: 50,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           AnimatedBuilder(
