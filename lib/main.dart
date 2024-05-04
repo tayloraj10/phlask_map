@@ -30,10 +30,14 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        initialRoute: '/', // Default route
+        initialRoute: '/',
         routes: {
-          '/': (context) => const LoadingPage(), // Home Screen
-          '/map': (context) => const MapPage(), // Details Screen
+          '/': (context) => const LoadingPage(),
+          '/map': (context) => const MapPage(),
+          '/mission': (context) => const MapPage(),
+          '/project': (context) => const MapPage(),
+          '/share': (context) => const MapPage(),
+          '/contribute': (context) => const MapPage()
         },
         debugShowCheckedModeBanner: false,
         title: appName,

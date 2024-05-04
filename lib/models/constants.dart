@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 const appName = 'Phlask';
 
-const primaryColor = Color.fromARGB(255, 46, 148, 216);
+const primaryColor = Color.fromARGB(255, 34, 169, 225);
 
 dateToString(DateTime date) {
   return DateFormat('yyyy-MM-dd').format(date);

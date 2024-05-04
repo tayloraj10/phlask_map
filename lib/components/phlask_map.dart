@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:phlask_map/components/info_dialog.dart';
+import 'package:phlask_map/components/map_control.dart';
 import 'package:phlask_map/models/app_data.dart';
 import 'package:provider/provider.dart';
 
@@ -86,16 +88,22 @@ class _PhlaskMapState extends State<PhlaskMap> {
     }
   }
 
+  showInfoDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // Return widget tree containing the AlertDialog
+        return const InfoDialog();
+      },
+    );
+  }
+
   Future<void> getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.best,
     );
     if (mounted) {
       Provider.of<AppData>(context, listen: false).updateLatLng(position);
-      Provider.of<AppData>(context, listen: false)
-          .getMapController
-          .animateCamera(CameraUpdate.newLatLngZoom(
-              Provider.of<AppData>(context, listen: false).getLatLng, 15.6));
     }
   }
 
@@ -157,6 +165,25 @@ class _PhlaskMapState extends State<PhlaskMap> {
               ),
             ),
           ),
+        ),
+        Positioned(
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: 'Info',
+            child: IconButton(
+              icon: const Icon(
+                Icons.info,
+                size: 30,
+              ),
+              onPressed: () => {showInfoDialog()},
+            ),
+          ),
+        ),
+        const Positioned(
+          bottom: 20,
+          left: 20,
+          child: MapControl(),
         )
       ],
     );
