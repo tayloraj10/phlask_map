@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:phlask_map/components/marker_dialog.dart';
 import 'package:phlask_map/models/app_data.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
@@ -15,8 +15,6 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPageState extends State<LoadingPage>
     with SingleTickerProviderStateMixin {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -40,6 +38,7 @@ class _LoadingPageState extends State<LoadingPage>
   Future<void> loadData() async {
     await loadIcons();
     // await loadCleanups();
+    await loadWater();
     if (mounted) {
       Navigator.pushNamed(context, '/map');
     }
@@ -60,6 +59,27 @@ class _LoadingPageState extends State<LoadingPage>
         'current': currentLocationMarkerIcon,
         // 'water_public': waterPublicIcon,
       });
+    }
+  }
+
+  loadWater() async {
+    final snapshot = await FirebaseDatabase.instance.ref().get();
+    if (snapshot.value != null) {
+      var data = snapshot.value as List?;
+      for (var element in data!) {
+        if (element != null && mounted) {
+          // print(element);
+          Provider.of<AppData>(context, listen: false).addMarker(
+            Marker(
+              markerId: MarkerId(element['tapnum'].toString()),
+              icon: Provider.of<AppData>(context, listen: false)
+                  .getIcons['current'],
+              position: LatLng(element['lat'], element['lon']),
+              onTap: (() => {}),
+            ),
+          );
+        }
+      }
     }
   }
 

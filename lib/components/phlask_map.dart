@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -19,7 +18,6 @@ class _PhlaskMapState extends State<PhlaskMap> {
   bool addClean = false;
   bool addTrash = false;
   bool pinDropped = false;
-  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   void initState() {

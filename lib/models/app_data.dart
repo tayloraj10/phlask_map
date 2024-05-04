@@ -60,9 +60,4 @@ class AppData extends ChangeNotifier {
     mapController = newMapController;
     notifyListeners();
   }
-  //cleanup data
-
-  //trash data
-
-  //auth
 }

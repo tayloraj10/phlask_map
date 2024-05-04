@@ -1,17 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phlask_map/components/map_app_bar.dart';
 import 'package:phlask_map/components/phlask_map.dart';
 
 class MapPage extends StatelessWidget {
-  MapPage({super.key});
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  const MapPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: MapAppBar(),
-      body: const SafeArea(
+      body: SafeArea(
         child: Row(
           children: [
             Expanded(

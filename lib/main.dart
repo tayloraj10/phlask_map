@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/', // Default route
         routes: {
           '/': (context) => const LoadingPage(), // Home Screen
-          '/map': (context) => MapPage(), // Details Screen
+          '/map': (context) => const MapPage(), // Details Screen
         },
         debugShowCheckedModeBanner: false,
         title: appName,
