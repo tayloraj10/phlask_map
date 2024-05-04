@@ -45,6 +45,7 @@ dependencies:
   provider: ^6.1.2
   url_strategy: ^0.2.0
   firebase_database: ^10.5.4
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:

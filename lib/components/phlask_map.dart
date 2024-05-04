@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:phlask_map/components/info_dialog.dart';
+import 'package:phlask_map/components/location_search_bar.dart';
 import 'package:phlask_map/components/map_control.dart';
 import 'package:phlask_map/models/app_data.dart';
 import 'package:provider/provider.dart';
@@ -184,6 +185,11 @@ class _PhlaskMapState extends State<PhlaskMap> {
           bottom: 20,
           left: 20,
           child: MapControl(),
+        ),
+        const Positioned(
+          top: 20,
+          left: 20,
+          child: LocationSearchBar(),
         )
       ],
     );

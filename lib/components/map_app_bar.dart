@@ -15,6 +15,16 @@ class MapAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(6), // Set preferred size of shadow
+        child: Material(
+          elevation: 1, // Set elevation to add shadow
+          color: Colors.grey[300], // Set color of shadow
+          child: Container(
+            height: 2, // Set height of bottom border
+          ),
+        ),
+      ),
       title: GestureDetector(
         onTap: () => {Navigator.pushNamed(context, '/map')},
         child: Tooltip(
@@ -25,33 +35,45 @@ class MapAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Mission',
-            style: textStyle,
+      actions: [
+        GestureDetector(
+          onTap: () => {Navigator.pushNamed(context, '/mission')},
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Mission',
+              style: textStyle,
+            ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Project',
-            style: textStyle,
+        GestureDetector(
+          onTap: () => {Navigator.pushNamed(context, '/project')},
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Project',
+              style: textStyle,
+            ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Share Water & Food',
-            style: textStyle,
+        GestureDetector(
+          onTap: () => {Navigator.pushNamed(context, '/share')},
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Share Water & Food',
+              style: textStyle,
+            ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Contribute',
-            style: textStyle,
+        GestureDetector(
+          onTap: () => {Navigator.pushNamed(context, '/contribute')},
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Contribute',
+              style: textStyle,
+            ),
           ),
         )
       ],

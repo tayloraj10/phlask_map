@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:phlask_map/screens/contribute.dart';
 import 'package:phlask_map/screens/loading.dart';
 import 'package:phlask_map/screens/map_page.dart';
+import 'package:phlask_map/screens/mission.dart';
+import 'package:phlask_map/screens/project.dart';
+import 'package:phlask_map/screens/share.dart';
 import 'package:provider/provider.dart';
 import 'models/app_data.dart';
 import 'models/constants.dart';
@@ -34,10 +38,10 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const LoadingPage(),
           '/map': (context) => const MapPage(),
-          '/mission': (context) => const MapPage(),
-          '/project': (context) => const MapPage(),
-          '/share': (context) => const MapPage(),
-          '/contribute': (context) => const MapPage()
+          '/mission': (context) => MissionPage(),
+          '/project': (context) => const ProjectPage(),
+          '/share': (context) => const SharePage(),
+          '/contribute': (context) => const ContributePage()
         },
         debugShowCheckedModeBanner: false,
         title: appName,
