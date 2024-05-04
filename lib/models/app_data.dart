@@ -15,6 +15,28 @@ class AppData extends ChangeNotifier {
     notifyListeners();
   }
 
+  //tap data
+  List taps = [];
+  List filteredTaps = [];
+
+  get getTaps {
+    return taps;
+  }
+
+  get getFilteredTaps {
+    return taps;
+  }
+
+  void updateTaps(List newTaps) {
+    taps = newTaps;
+    notifyListeners();
+  }
+
+  void updateFilteredTaps(List newFilteredTaps) {
+    filteredTaps = newFilteredTaps;
+    notifyListeners();
+  }
+
   //markers
   Set<Marker> markers = {};
 

@@ -25,7 +25,7 @@ class _PhlaskMapState extends State<PhlaskMap> {
   }
 
   loadPosition() async {
-    panToPosition();
+    // panToPosition();
     // await _loadCustomMarker().then((value) => {loadCleanups(), loadTrash()});
     await getCurrentLocation().then((value) => {setCurrentLocationMarker()});
     getLocationStream();
@@ -39,7 +39,7 @@ class _PhlaskMapState extends State<PhlaskMap> {
         position: Provider.of<AppData>(context, listen: false).getLatLng,
       ));
     });
-    panToPosition();
+    // panToPosition();
   }
 
   static const CameraPosition _kStart = CameraPosition(
@@ -82,7 +82,7 @@ class _PhlaskMapState extends State<PhlaskMap> {
               LatLngBounds(
                   southwest: LatLng(southwestLat, southwestLon),
                   northeast: LatLng(northeastLat, northeastLon)),
-              20));
+              0));
     }
   }
 
@@ -127,6 +127,7 @@ class _PhlaskMapState extends State<PhlaskMap> {
                 Provider.of<AppData>(context, listen: false)
                     .updateMapController(controller);
               });
+              zoomToMarkers();
               await loadPosition();
             }),
         Positioned(

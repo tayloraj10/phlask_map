@@ -17,3 +17,20 @@ timestampToString(Timestamp date) {
 stringToDate(String date) {
   return DateTime.parse(date);
 }
+
+getIconType(String type) {
+  switch (type) {
+    case 'Public':
+      return 'water_public';
+    case 'Restricted':
+      return 'water_restricted';
+    case 'Private':
+      return 'water_private';
+    case 'Private-Shared':
+      return 'water_shared';
+    default:
+      return '';
+  }
+}
+
+const acceptedTapTypes = ['Public', 'Private', 'Private-Shared', 'Restricted'];

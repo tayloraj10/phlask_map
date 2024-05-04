@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:phlask_map/components/marker_dialog.dart';
 import 'package:phlask_map/models/app_data.dart';
+import 'package:phlask_map/models/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -50,34 +51,54 @@ class _LoadingPageState extends State<LoadingPage>
       const ImageConfiguration(size: Size(40, 40)),
       'images/current_location.png',
     );
-    // BitmapDescriptor waterPublicIcon = await BitmapDescriptor.fromAssetImage(
-    //   const ImageConfiguration(size: Size(40, 40)),
-    //   'images/water_public.svg',
-    // );
+    BitmapDescriptor waterPublicIcon = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(40, 40)),
+      'images/water_public.svg',
+    );
+    BitmapDescriptor waterPrivateIcon = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(40, 40)),
+      'images/water_private.svg',
+    );
+    BitmapDescriptor waterRestrictedIcon =
+        await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(40, 40)),
+      'images/water_restricted.svg',
+    );
+    BitmapDescriptor waterSharedIcon = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(40, 40)),
+      'images/water_shared.svg',
+    );
     if (mounted) {
       Provider.of<AppData>(context, listen: false).updateIcons({
         'current': currentLocationMarkerIcon,
-        // 'water_public': waterPublicIcon,
+        'water_public': waterPublicIcon,
+        'water_private': waterPrivateIcon,
+        'water_restricted': waterRestrictedIcon,
+        'water_shared': waterSharedIcon,
       });
     }
   }
 
   loadWater() async {
     final snapshot = await FirebaseDatabase.instance.ref().get();
-    if (snapshot.value != null) {
+    if (snapshot.value != null && mounted) {
       var data = snapshot.value as List?;
       for (var element in data!) {
-        if (element != null && mounted) {
+        Provider.of<AppData>(context, listen: false).updateTaps(data);
+        if (element != null) {
           // print(element);
-          Provider.of<AppData>(context, listen: false).addMarker(
-            Marker(
-              markerId: MarkerId(element['tapnum'].toString()),
-              icon: Provider.of<AppData>(context, listen: false)
-                  .getIcons['current'],
-              position: LatLng(element['lat'], element['lon']),
-              onTap: (() => {}),
-            ),
-          );
+          if (element.containsKey('access') &&
+              acceptedTapTypes.contains(element['access'])) {
+            Provider.of<AppData>(context, listen: false).addMarker(
+              Marker(
+                markerId: MarkerId(element['tapnum'].toString()),
+                icon: Provider.of<AppData>(context, listen: false)
+                    .getIcons[getIconType(element['access'])],
+                position: LatLng(element['lat'], element['lon']),
+                onTap: (() => {}),
+              ),
+            );
+          }
         }
       }
     }
