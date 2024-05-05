@@ -81,12 +81,15 @@ class _MapControlState extends State<MapControl> {
                       color: primaryColor,
                     )),
               ),
-              Text(
-                '${Provider.of<AppData>(context, listen: true).filteredTaps.length} Taps',
-                style: const TextStyle(
-                    color: primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '${Provider.of<AppData>(context, listen: true).filteredTaps.length} Taps',
+                  style: const TextStyle(
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),
               )
             ],
           ),

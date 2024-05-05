@@ -46,7 +46,7 @@ dependencies:
   url_strategy: ^0.2.0
   firebase_database: ^10.5.4
   http: ^1.2.1
-  flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.0.8+1
 
 dev_dependencies:
   flutter_test:
