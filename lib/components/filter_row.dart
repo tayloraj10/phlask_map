@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:phlask_map/models/app_data.dart';
+import 'package:provider/provider.dart';
 
 class FilterRow extends StatefulWidget {
   final String name;
@@ -16,8 +18,29 @@ class FilterRow extends StatefulWidget {
 
 class _FilterRowState extends State<FilterRow> {
   bool enabled = true;
+
   @override
   Widget build(BuildContext context) {
+    if (widget.name == 'PUBLIC') {
+      setState(() {
+        enabled = Provider.of<AppData>(context, listen: false).getPublic;
+      });
+    }
+    if (widget.name == 'PRIVATE') {
+      setState(() {
+        enabled = Provider.of<AppData>(context, listen: false).getPrivate;
+      });
+    }
+    if (widget.name == 'SHARED') {
+      setState(() {
+        enabled = Provider.of<AppData>(context, listen: false).getShared;
+      });
+    }
+    if (widget.name == 'RESTRICTED') {
+      setState(() {
+        enabled = Provider.of<AppData>(context, listen: false).getRestricted;
+      });
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -34,6 +57,22 @@ class _FilterRowState extends State<FilterRow> {
             onTap: () => {
               setState(() {
                 enabled = !enabled;
+                if (widget.name == 'PUBLIC') {
+                  Provider.of<AppData>(context, listen: false)
+                      .setPublic(enabled);
+                }
+                if (widget.name == 'PRIVATE') {
+                  Provider.of<AppData>(context, listen: false)
+                      .setPrivate(enabled);
+                }
+                if (widget.name == 'SHARED') {
+                  Provider.of<AppData>(context, listen: false)
+                      .setShared(enabled);
+                }
+                if (widget.name == 'RESTRICTED') {
+                  Provider.of<AppData>(context, listen: false)
+                      .setRestricted(enabled);
+                }
               })
             },
             child: SvgPicture.asset(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phlask_map/components/filter.dart';
+import 'package:phlask_map/models/app_data.dart';
 import 'package:phlask_map/models/constants.dart';
+import 'package:provider/provider.dart';
 
 class MapControl extends StatefulWidget {
   const MapControl({super.key});
@@ -78,6 +80,13 @@ class _MapControlState extends State<MapControl> {
                       size: 40,
                       color: primaryColor,
                     )),
+              ),
+              Text(
+                '${Provider.of<AppData>(context, listen: true).filteredTaps.length} Taps',
+                style: const TextStyle(
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
               )
             ],
           ),

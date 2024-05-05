@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phlask_map/components/filter_row.dart';
 import 'package:phlask_map/components/filter_toggle.dart';
+import 'package:phlask_map/models/app_data.dart';
+import 'package:provider/provider.dart';
 
 class TapFilter extends StatefulWidget {
   const TapFilter({super.key});
@@ -41,7 +43,7 @@ class _TapFilterState extends State<TapFilter> {
                             image: 'images/water_shared.svg',
                           ),
                           FilterRow(
-                            name: 'Private',
+                            name: 'PRIVATE',
                             image: 'images/water_private.svg',
                           ),
                           FilterRow(
@@ -76,7 +78,12 @@ class _TapFilterState extends State<TapFilter> {
                     )
                   ],
                 ),
-                ElevatedButton(onPressed: () => {}, child: const Text('RESET'))
+                ElevatedButton(
+                    onPressed: () => {
+                          Provider.of<AppData>(context, listen: false).reset(),
+                          Navigator.pop(context)
+                        },
+                    child: const Text('RESET'))
               ],
             ),
           ),
